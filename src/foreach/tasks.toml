@@ -1,0 +1,6 @@
+[foreach]
+dir = "{{cwd}}"
+usage = """
+arg "command" var=#true help="command to execute for each child directory"
+"""
+run = "node $MISE_TASK_DIR/foreach.js"
