@@ -1,4 +1,4 @@
-const { execSync, spawnSync } = require('child_process');
+const { execSync } = require('child_process');
 
 function exec(command) {
     execSync(command, { stdio: 'inherit' });
