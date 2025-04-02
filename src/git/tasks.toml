@@ -1,4 +1,23 @@
 [commit]
-dir = "{{cwd}}"
 description = 'Creates a commit and returns its hash'
+dir = "{{cwd}}"
 run = "node $MISE_TASK_DIR/commit-and-get-hash/commit-and-get-hash.js"
+
+[git-purge]
+description = 'Deletes specified branches locally and remotely'
+dir = "{{cwd}}"
+usage = """
+arg "branches" var=#true help="Git branches to delete"
+complete "branches" run="mise run git-purge-completion"
+"""
+run = "node $MISE_TASK_DIR/purge-branch/purge-branch.js"
+
+[git-purge-completion]
+description = 'Get the deletable branches'
+dir = "{{cwd}}"
+hide = true
+quiet = true
+usage = """
+arg "[branches]" var=#true help="Git branches to delete"
+"""
+run = "node $MISE_TASK_DIR/purge-branch/purge-branch-completion.js"
