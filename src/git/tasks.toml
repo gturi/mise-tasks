@@ -1,0 +1,4 @@
+[commit]
+dir = "{{cwd}}"
+description = 'Creates a commit and returns its hash'
+run = "node $MISE_TASK_DIR/commit-and-get-hash/commit-and-get-hash.js"
