@@ -1,4 +1,4 @@
-[commit]
+[git-commit]
 description = 'Creates a commit and returns its hash'
 dir = "{{cwd}}"
 run = "node $MISE_TASK_DIR/commit-and-get-hash/commit-and-get-hash.js"
@@ -21,3 +21,20 @@ usage = """
 arg "[branches]" var=#true help="Git branches to delete"
 """
 run = "node $MISE_TASK_DIR/purge-branch/purge-branch-completion.js"
+
+[git-update]
+description = 'Merges specified branch into current one'
+dir = "{{cwd}}"
+usage = """
+flag "-s --strategy <strategy>" default="" help="Merge strategy"
+arg "targetBranch" help="Git branch to pull updates from and merge into the current one"
+complete "targetBranch" run="mise run git-update-completion"
+"""
+run = "node $MISE_TASK_DIR/update-current-branch/update-current-branch.js"
+
+[git-update-completion]
+description = 'Get the branches to pull updates from'
+dir = "{{cwd}}"
+hide = true
+quiet = true
+run = "node $MISE_TASK_DIR/update-current-branch/update-current-branch-completion.js"
