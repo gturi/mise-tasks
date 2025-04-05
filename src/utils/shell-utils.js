@@ -30,6 +30,22 @@ module.exports = {
    */
   sanitizeArgs(...args) {
     return sanitizeArgs(args);
+  },
+  /**
+   *
+   * @param {string} varargEnvVariable
+   * @returns {string[]}
+   */
+  varargEnvVariableToArray(varargEnvVariable) {
+    // TODO: if the variable is "foo 'bar baz'"" the splitting will be wrong!
+    return varargEnvVariable.split(' ');
+  },
+  /**
+   *
+   * @param {string[]} completionArray
+   */
+  printCompletion(completionArray) {
+    console.log(completionArray.join(' '));
   }
 }
 

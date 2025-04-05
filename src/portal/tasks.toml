@@ -6,3 +6,21 @@ flag "-d --directory [directory]" help="Path of the directory to link (defaults 
 arg "[linkName]" help="The name of the link (defaults to the name of the directory)"
 """
 run = "node $MISE_TASK_DIR/create/create.js"
+
+[portal-delete]
+description = 'Removes a previously created link'
+dir = "{{cwd}}"
+usage = """
+arg "<linkNames>" var=#true help="The name of the links to remove (on windows you can omit '.lnk' extension)"
+complete "linkNames" run="mise run portal-delete-completion"
+"""
+run = "node $MISE_TASK_DIR/delete/delete.js"
+
+[portal-delete-completion]
+dir = "{{cwd}}"
+hide = true
+quiet = true
+usage = """
+arg "[linkNames]" var=#true help="The name of the links to remove (on windows you can omit '.lnk' extension)"
+"""
+run = "node $MISE_TASK_DIR/delete/delete-completion.js"
