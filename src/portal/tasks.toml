@@ -24,3 +24,18 @@ usage = """
 arg "[linkNames]" var=#true help="The name of the links to remove (on windows you can omit '.lnk' extension)"
 """
 run = "node $MISE_TASK_DIR/delete/delete-completion.js"
+
+[portal-target]
+description = 'Gets the target of a portal link'
+dir = "{{cwd}}"
+usage = """
+arg "<linkName>" help="The name of the portal link"
+complete "linkName" run="mise run portal-target-completion"
+"""
+run = "node $MISE_TASK_DIR/target/target.js"
+
+[portal-target-completion]
+dir = "{{cwd}}"
+hide = true
+quiet = true
+run = "node $MISE_TASK_DIR/target/target-completion.js"
