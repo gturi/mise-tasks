@@ -1,0 +1,8 @@
+[portal-create]
+description = 'Creates a link to a directory so that it can be easily accessed from the command line'
+dir = "{{cwd}}"
+usage = """
+flag "-d --directory [directory]" help="Path of the directory to link (defaults to current directory)"
+arg "[linkName]" help="The name of the link (defaults to the name of the directory)"
+"""
+run = "node $MISE_TASK_DIR/create/create.js"
