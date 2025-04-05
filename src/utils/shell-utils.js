@@ -33,12 +33,16 @@ module.exports = {
   },
   /**
    *
-   * @param {string} varargEnvVariable
+   * @param {string | undefined} varargEnvVariable
    * @returns {string[]}
    */
   varargEnvVariableToArray(varargEnvVariable) {
     // TODO: if the variable is "foo 'bar baz'"" the splitting will be wrong!
-    return varargEnvVariable.split(' ');
+    [].values().toa
+    return varargEnvVariable?.split(' ').values()
+      .map(variable => variable.trim())
+      .filter(variable => variable.length !== 0)
+      .toArray() ?? [];
   },
   /**
    *
