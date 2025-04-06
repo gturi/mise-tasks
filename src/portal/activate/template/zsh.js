@@ -14,7 +14,7 @@ PORTAL_DIR="${portalDirectory}"
 if [[ -d "$PORTAL_DIR" ]]; then
     export CDPATH=".:$PORTAL_DIR:/"
 
-    function ${shellFunctionName} {
+    ${shellFunctionName}() {
         # $1: portal link name
         if [[ "$#" -ne 1 ]]; then
             echo 'Usage: ${shellFunctionName} $linkName'
@@ -25,14 +25,14 @@ if [[ -d "$PORTAL_DIR" ]]; then
         builtin cd "$TARGET"
     }
 
-    # ${shellFunctionName} completion for zsh
-    _${shellFunctionName}_completion() {
+    # ${shellFunctionName} completion
+    _${shellFunctionName}() {
         local -a type_list
         type_list=("\${(@f)$(mise run portal-target-completion)}")
         _describe 'portal targets' type_list
     }
 
-    compdef _${shellFunctionName}_completion ${shellFunctionName}
+    compdef _${shellFunctionName} ${shellFunctionName}
 fi
 `;
 }
