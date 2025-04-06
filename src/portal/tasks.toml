@@ -25,6 +25,22 @@ arg "[linkNames]" var=#true help="The name of the links to remove (on windows yo
 """
 run = "node $MISE_TASK_DIR/delete/delete-completion.js"
 
+[portal-rename]
+description = 'Renames a portal link'
+dir = "{{cwd}}"
+usage = """
+arg "<linkName>" help="The name of the portal link to rename"
+complete "linkName" run="mise run portal-rename-completion"
+arg "<newLinkName>" help="The new name of the portal link"
+"""
+run = "node $MISE_TASK_DIR/rename/rename.js"
+
+[portal-rename-completion]
+dir = "{{cwd}}"
+hide = true
+quiet = true
+run = "node $MISE_TASK_DIR/rename/rename-completion.js"
+
 [portal-target]
 description = 'Gets the target of a portal link'
 dir = "{{cwd}}"
