@@ -1,3 +1,5 @@
+const { printCompletion } = require('../../utils/shell-utils.js');
+
 /**
  * @return {string[]}
  */
@@ -10,12 +12,8 @@ function getLocalBranches() {
   return localBranches.filter(branch => branch !== currentBranch);
 };
 
-function logLocalBranches() {
-  console.log(getLocalBranches().join(' '));
-}
-
 function main() {
-  logLocalBranches();
+  printCompletion(getLocalBranches());
 }
 
 main();

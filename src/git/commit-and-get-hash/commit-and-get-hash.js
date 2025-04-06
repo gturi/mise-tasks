@@ -1,7 +1,7 @@
 const { execSync } = require('child_process');
 
 function exec(command) {
-    execSync(command, { stdio: 'inherit' });
+  execSync(command, { stdio: 'inherit' });
 }
 
 function commitAndGetHash() {
@@ -29,7 +29,7 @@ function commitAndGetHash() {
 };
 
 function main() {
-    commitAndGetHash();
+  commitAndGetHash();
 }
 
 main();

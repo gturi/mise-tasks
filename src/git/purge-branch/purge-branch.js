@@ -1,3 +1,4 @@
+const { varargEnvVariableToArray } = require('../../utils/shell-utils.js');
 const { execSync } = require('child_process');
 
 /**
@@ -23,7 +24,8 @@ function purgeBranch(gitBranches) {
 
 function main() {
   const { usage_branches } = process.env;
-  purgeBranch(usage_branches.split(' '));
+  const branches =  varargEnvVariableToArray(usage_branches);
+  purgeBranch(branches);
 }
 
 main();

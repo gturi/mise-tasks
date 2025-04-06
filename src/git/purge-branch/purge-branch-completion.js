@@ -1,11 +1,16 @@
+const { printCompletion } = require('../../utils/shell-utils.js');
+const sharedLogic = require('./purge-shared-logic.js');
+
+/**
+ * @return {string[]}
+ */
 function getDeletableBranches() {
-  const sharedLogic = require('./purge-shared-logic.js');
   // TODO: exclude from the deletable branches those that are already passed as an argument
-  console.log(sharedLogic.getDeletableBranches().join(' '));
+  return sharedLogic.getDeletableBranches();
 };
 
 function main() {
-  getDeletableBranches();
+  printCompletion(getDeletableBranches());
 }
 
 main();
