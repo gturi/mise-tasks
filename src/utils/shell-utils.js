@@ -49,7 +49,7 @@ module.exports = {
    * @param {string[]} completionArray
    */
   printCompletion(completionArray) {
-    console.log(completionArray.join(' '));
+    console.log(completionArray.join('\n'));
   }
 }
 
