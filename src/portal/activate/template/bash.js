@@ -14,7 +14,7 @@ PORTAL_DIR="${portalDirectory}"
 if [ -d "$PORTAL_DIR" ]; then
     export CDPATH=".:$PORTAL_DIR:/"
 
-    function ${shellFunctionName} {
+    ${shellFunctionName}() {
         # $1: portal link name
         # shellcheck disable=SC2016
         [ "$#" -ne "1" ] && echo 'Usage: ${shellFunctionName} $linkName' && return 1
