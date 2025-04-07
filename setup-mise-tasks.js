@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { readdirSync, existsSync, appendFileSync } from 'fs';
+import fs from 'fs';
 import { homedir } from 'os';
 import path from 'path';
 import readline from 'readline';
@@ -28,9 +28,9 @@ console.log(process.cwd())
 
 const src = path.join(__dirname, 'src');
 
-const miseTasks = readdirSync(src).values()
+const miseTasks = fs.readdirSync(src).values()
   .map(directory => path.join(src, directory, 'tasks.toml'))
-  .filter(tomlTasksFile => existsSync(tomlTasksFile))
+  .filter(tomlTasksFile => fs.existsSync(tomlTasksFile))
   .toArray();
 
 const miseConfig = `
@@ -38,11 +38,15 @@ const miseConfig = `
 includes = ${JSON.stringify(miseTasks, null, 2)}
 `;
 
-const miseConfigFile = path.join(homedir(), '.config', 'mise', 'config.toml');
+const miseConfigDirectory = path.join(homedir(), '.config', 'mise');
+
+fs.mkdirSync(miseConfigDirectory, { recursive: true });
+
+const miseConfigFile = path.join(miseConfigDirectory, 'config.toml');
 
 // TODO: use mise native commands when available
 
-appendFileSync(miseConfigFile, miseConfig);
+fs.appendFileSync(miseConfigFile, miseConfig);
 
 console.log(`Appended the following task configuration to '${miseConfigFile}':`)
 console.log(miseConfig);
@@ -65,7 +69,7 @@ console.log(miseConfig);
   const activationCommand = `
   eval "$(mise run portal-activate --command w ${shellType})"
   `;
-  appendFileSync(shellRcFile, activationCommand.split('\n').map(line => line.trim()).join('\n'));
+  fs.appendFileSync(shellRcFile, activationCommand.split('\n').map(line => line.trim()).join('\n'));
 
   console.log(`Appended '${activationCommand}' to '${shellRcFile}'`)
 })();
