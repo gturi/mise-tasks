@@ -10,6 +10,10 @@ currentDir="$(dirname "$0")"
 
 cd "$currentDir"
 
+echo 'mise tasks: the installer assumes that mise is correctly installed for your shell as explained at:'
+echo '- https://mise.jdx.dev/installing-mise.html#shells'
+echo '- https://mise.jdx.dev/cli/completion.html#flags'
+
 # reloads executables in $PATH
 hash -r
 
