@@ -52,7 +52,7 @@ console.log(`Appended the following task configuration to '${miseConfigFile}':`)
 console.log(miseConfig);
 
 (async () => {
-  const misePortalActivation = await prompt("Do you want to activate mise portal functionality? [s/N]: ");
+  const misePortalActivation = await prompt("Do you want to activate mise portal functionality in your shell? [s/N]: ");
 
   if (misePortalActivation?.trim() !== 's') {
     console.warn(`Mise portal activation aborted`);
