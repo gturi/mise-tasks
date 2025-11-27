@@ -38,3 +38,20 @@ dir = "{{cwd}}"
 hide = true
 quiet = true
 run = "node $MISE_TASK_DIR/sync-current-branch/sync-current-branch-completion.js"
+
+[git-forward]
+description = 'Merges current branch into a target branch'
+dir = "{{cwd}}"
+usage = """
+flag "-s --strategy <strategy>" default="" help="Merge strategy"
+arg "targetBranch" help="Git branch to merge changes to"
+complete "targetBranch" run="mise run git-forward-completion"
+"""
+run = "node $MISE_TASK_DIR/forward-to-branch/forward-to-branch.js"
+
+[git-forward-completion]
+description = 'Get the branches to merge changes to'
+dir = "{{cwd}}"
+hide = true
+quiet = true
+run = "node $MISE_TASK_DIR/forward-to-branch/forward-to-branch-completion.js"
