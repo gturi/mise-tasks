@@ -33,7 +33,7 @@ const miseTasks = fs.readdirSync(src).values()
   .filter(tomlTasksFile => fs.existsSync(tomlTasksFile))
   .toArray();
 
-const miseConfig = `
+const miseTaskConfig = `
 [task_config]
 includes = ${JSON.stringify(miseTasks, null, 2)}
 `;
@@ -46,10 +46,32 @@ const miseConfigFile = path.join(miseConfigDirectory, 'config.toml');
 
 // TODO: use mise native commands when available
 
-fs.appendFileSync(miseConfigFile, miseConfig);
+fs.appendFileSync(miseConfigFile, miseTaskConfig);
 
-console.log(`Appended the following task configuration to '${miseConfigFile}':`)
-console.log(miseConfig);
+console.log(`Appended the following task configuration to '${miseConfigFile}':`);
+console.log(miseTaskConfig);
+
+// TODO: use mise native commands when available
+
+const commandsToAlias = [
+  'git-sync',
+  'git-forward',
+  'portal-create',
+  'portal-delete',
+  'portal-rename',
+  'portal-target',
+  'foreach'
+]
+
+const miseShellAliasConfig = `
+[shell_alias]
+${commandsToAlias.map(command => `${command} = "mise run ${command}"`).join('\n')}
+`;
+
+fs.appendFileSync(miseConfigFile, miseShellAliasConfig);
+
+console.log(`Appended the following task configuration to '${miseConfigFile}':`);
+console.log(miseShellAliasConfig);
 
 (async () => {
   const misePortalActivation = await prompt("Do you want to activate mise portal functionality in your shell? [s/N]: ");
