@@ -1,0 +1,23 @@
+{
+  "name": "mise-tasks",
+  "version": "1.0.0",
+  "description": "Collection of mise tasks that I use as my shell utilities.",
+  "homepage": "https://github.com/gturi/mise-tasks#readme",
+  "bugs": {
+    "url": "https://github.com/gturi/mise-tasks/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gturi/mise-tasks.git"
+  },
+  "license": "MIT",
+  "author": "",
+  "type": "commonjs",
+  "main": "setup-mise-tasks.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}
