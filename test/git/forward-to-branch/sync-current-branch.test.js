@@ -375,7 +375,7 @@ describe('sync-current-branch integration tests', () => {
 
     // Simulate someone else pushing to main by creating another clone
     const anotherClonePath = fs.mkdtempSync(path.join(os.tmpdir(), 'git-clone-'));
-    execSync(`git clone ${remoteRepoPath} ${anotherClonePath}`, { stdio: 'pipe' });
+    execSync(`git clone -b main ${remoteRepoPath} ${anotherClonePath}`, { stdio: 'pipe' });
 
     // Make changes in the other clone
     fs.writeFileSync(path.join(anotherClonePath, 'remote-change.txt'), 'remote change');
