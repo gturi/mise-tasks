@@ -379,6 +379,8 @@ describe('sync-current-branch integration tests', () => {
 
     // Make changes in the other clone
     fs.writeFileSync(path.join(anotherClonePath, 'remote-change.txt'), 'remote change');
+    execSync('git config user.email "othertest@example.com"', { cwd: anotherClonePath, stdio: 'pipe' });
+    execSync('git config user.name "Another Test User"', { cwd: anotherClonePath, stdio: 'pipe' });
     execSync('git add .', { cwd: anotherClonePath, stdio: 'pipe' });
     execSync('git commit -m "Remote change"', { cwd: anotherClonePath, stdio: 'pipe' });
     execSync('git push origin main', { cwd: anotherClonePath, stdio: 'pipe' });
