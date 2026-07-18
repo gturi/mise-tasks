@@ -1,9 +1,9 @@
 const { spawnSync } = require('../utils/shell-utils.js');
 
-const getGitBranches = (...args) => {
-  return spawnSync('git', 'branch', ...args)?.stdout?.toString()
+const getGitBranches = (gitBranchCmdArgs) => {
+  return spawnSync(`git branch ${gitBranchCmdArgs}`)?.stdout?.toString()
     .split('\n')
-    .filter(branch => branch !== '') ?? [];
+    .filter(Boolean) ?? [];
 }
 
 const protectedBranches = [
