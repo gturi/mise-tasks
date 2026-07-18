@@ -66,7 +66,7 @@ describe('sync-current-branch-completion integration tests', () => {
   test('should return empty output when there is only one branch (current branch)', () => {
     const result = runCompletionScript();
 
-    assert.strictEqual(result.status, 0, `Script failed: ${result.stderr}`);
+    assertThatResultHasNoError(result);
     assert.strictEqual(result.stdout.trim(), '');
   });
 
@@ -77,8 +77,7 @@ describe('sync-current-branch-completion integration tests', () => {
 
     const result = runCompletionScript();
 
-    assert.strictEqual(result.status, 0, `Script failed: ${result.stderr}`);
-    assert.strictEqual(result.stderr, '', `Script failed: ${result.stderr}`);
+    assertThatResultHasNoError(result);
 
     const branches = result.stdout.trim().split('\n').map(b => b.trim()).filter(Boolean).sort();
 
@@ -95,8 +94,7 @@ describe('sync-current-branch-completion integration tests', () => {
 
     const result = runCompletionScript();
 
-    assert.strictEqual(result.status, 0, `Script failed: ${result.stderr}`);
-    assert.strictEqual(result.stderr, '', `Script failed: ${result.stderr}`);
+    assertThatResultHasNoError(result);
 
     const branches = result.stdout.trim().split('\n').map(b => b.trim()).filter(Boolean).sort();
 
@@ -110,8 +108,7 @@ describe('sync-current-branch-completion integration tests', () => {
 
     const result = runCompletionScript();
 
-    assert.strictEqual(result.status, 0, `Script failed: ${result.stderr}`);
-    assert.strictEqual(result.stderr, '', `Script failed: ${result.stderr}`);
+    assertThatResultHasNoError(result);
 
     const branches = result.stdout.trim().split('\n').map(b => b.trim()).filter(Boolean).sort();
 
@@ -131,10 +128,13 @@ describe('sync-current-branch-completion integration tests', () => {
     // Clean up temporary non-git directory
     fs.rmSync(nonGitDir, { recursive: true, force: true });
 
-    // In a non-git repository, the git commands fail.
-    // The script should still run, print empty output and exit.
+    assertThatResultHasNoError(result);
     assert.strictEqual(result.stdout.trim(), '');
-    assert.strictEqual(result.status, 0, `Script failed: ${result.stderr}`);
-    assert.strictEqual(result.stderr, '', `Script failed: ${result.stderr}`);
   });
+
+  function assertThatResultHasNoError(result) {
+    assert.strictEqual(result.stderr, '');
+    assert.strictEqual(result.error, undefined);
+    assert.strictEqual(result.status, 0);
+  }
 });
